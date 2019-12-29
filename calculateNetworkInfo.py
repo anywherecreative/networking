@@ -53,8 +53,15 @@ def getRange(ip):
 	gateway = getGateWay(ip)
 	hosts = getMaxHosts(ip)
 	octets = gateway.split(".")
-	return {"min":int(octets[3])+1, "max":int(octets[3])+hosts}
+	last = octets[3];
+	octets.pop();
+	return {"min":".".join(octets)+"."+str(int(last)+1), "max":".".join(octets)+"."+str(int(last)+hosts)}
 
+def getBroadcastAddress(ip):
+	gateway = getGateWay(ip)
+	hosts = getMaxHosts(ip)
+	octets = gateway.split(".")
+	return 
 
 
 
