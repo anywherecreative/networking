@@ -61,7 +61,8 @@ def getBroadcastAddress(ip):
 	gateway = getGateWay(ip)
 	hosts = getMaxHosts(ip)
 	octets = gateway.split(".")
-	return 
+	octets[3] = str(int(octets[3])+(hosts+1))
+	return ".".join(octets)
 
 
 
@@ -75,6 +76,7 @@ def mainLoop():
 		range = getRange(ip);
 		print("Host Min: " + str(range['min']))
 		print("Host Max: " + str(range['max']))
+		print("broadcast: " + getBroadcastAddress(ip))
 	else:
 		exit()
 
