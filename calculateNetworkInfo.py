@@ -47,7 +47,7 @@ def getMaxHosts(ip):
 	parts = ip.split("/")
 	partial = int(parts[1])%8 #calculate shift on partial octet
 	hosts = int(("0"*partial).ljust(8,"1"),2)
-	return hosts
+	return hosts-1
 
 
 
