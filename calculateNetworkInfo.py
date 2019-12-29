@@ -49,6 +49,13 @@ def getMaxHosts(ip):
 	hosts = int(("0"*partial).ljust(8,"1"),2)
 	return hosts-1
 
+def getRange(ip):
+	gateway = getGateWay(ip)
+	hosts = getMaxHosts(ip)
+	octets = gateway.split(".")
+	return {"min":int(octets[3])+1, "max":int(octets[3])+hosts}
+
+
 
 
 def mainLoop():
@@ -58,6 +65,9 @@ def mainLoop():
 		print("Subnet Mask: " + getSubnetMask(parts[1]))
 		print("Gateway: " + getGateWay(ip))
 		print("Max Hosts: " + str(getMaxHosts(ip)))
+		range = getRange(ip);
+		print("Host Min: " + str(range['min']))
+		print("Host Max: " + str(range['max']))
 	else:
 		exit()
 
