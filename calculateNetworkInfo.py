@@ -34,6 +34,8 @@ def getGateWay(ip):
 		# we are only interested in the places dictated by the mask, so we take these and trim the rest
 		# we append the required number of 0s to complete the octet, then convert the result to decimal
 		final += str(int(pcalc[0:partial].ljust(8,"0"),2))
+
+
 		
 		#finally, append empty octets to complete the ip address if necessary
 		final = final+".0"*(3-full)
@@ -41,12 +43,21 @@ def getGateWay(ip):
 	except ValueError:
 		return 0
 
+def getMaxHosts(ip):
+	parts = ip.split("/")
+	partial = int(parts[1])%8 #calculate shift on partial octet
+	hosts = int(("0"*partial).ljust(8,"1"),2)
+	return hosts
+
+
+
 def mainLoop():
 	ip = raw_input("Enter an ip address with slash notation, or Q to quit: ")
 	if(ip != "q" and ip != "Q"):
 		parts = ip.split("/")
 		print("Subnet Mask: " + getSubnetMask(parts[1]))
 		print("Gateway: " + getGateWay(ip))
+		print("Max Hosts: " + str(getMaxHosts(ip)))
 	else:
 		exit()
 
